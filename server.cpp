@@ -39,7 +39,7 @@ void *thread_function(void *arg)
     {
         std::stringstream buffer;
         buffer << file.rdbuf();
-        response += "HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n<b>Hello World!</b>";
+        response += "HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n<b>Hello World!</b>";
         file.close();
     }
     if(result < 0) std::cout << "ERROR" << std::endl;

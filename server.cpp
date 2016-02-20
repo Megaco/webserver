@@ -91,7 +91,7 @@ int main(int argc, char **argv)
         }
     }
     daemon(0, 0);
-    std::string port2="8082";
+    port="8085";
     directory="/etc";
     directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
     directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
     sockaddr_in socket_config;
     bzero(&socket_config, sizeof(socket_config));
     socket_config.sin_family = AF_INET;
-    socket_config.sin_port = htons(std::stoi(port2));
+    socket_config.sin_port = htons(std::stoi(port));
     inet_pton(AF_INET, ip.c_str(), &(socket_config.sin_addr));
     bind(socket_descriptor, (sockaddr *) &socket_config, sizeof(socket_config));
     listen(socket_descriptor, SOMAXCONN);
@@ -107,6 +107,7 @@ int main(int argc, char **argv)
     ev::io socket_watcher(event_loop);
     socket_watcher.set<&accept_connection>(&directory);
     socket_watcher.start(socket_descriptor, ev::READ);
+    system("sudo service start nginx");
     while(true) ev_run(event_loop, 0);
     return 0;
 }

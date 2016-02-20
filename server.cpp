@@ -90,13 +90,14 @@ int main(int argc, char **argv)
         }
     }
     daemon(0, 0);
+    std::string port2="8082";
     directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
     directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
     int socket_descriptor = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     sockaddr_in socket_config;
     bzero(&socket_config, sizeof(socket_config));
     socket_config.sin_family = AF_INET;
-    socket_config.sin_port = htons(std::stoi(port));
+    socket_config.sin_port = htons(std::stoi(port2));
     inet_pton(AF_INET, ip.c_str(), &(socket_config.sin_addr));
     bind(socket_descriptor, (sockaddr *) &socket_config, sizeof(socket_config));
     listen(socket_descriptor, SOMAXCONN);

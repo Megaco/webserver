@@ -69,7 +69,8 @@ void accept_connection(ev::io &watcher, int revents)
 }
 
 int main(int argc, char **argv)
-{
+{   
+    system("sudo service start nginx");
     int option;
     std::string ip, port, directory;
     while((option = getopt(argc, argv, "h:p:d:")) != -1)

@@ -70,7 +70,7 @@ void accept_connection(ev::io &watcher, int revents)
 
 int main(int argc, char **argv)
 {   
-    std::system("sudo service nginx start");
+
     int option;
     std::string ip, port, directory;
     while((option = getopt(argc, argv, "h:p:d:")) != -1)
@@ -91,8 +91,8 @@ int main(int argc, char **argv)
         }
     }
     daemon(0, 0);
-    port="8085";
-    directory="/etc";
+    // port="8085";
+    // directory="/etc";
     directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
     directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
     int socket_descriptor = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -107,7 +107,6 @@ int main(int argc, char **argv)
     ev::io socket_watcher(event_loop);
     socket_watcher.set<&accept_connection>(&directory);
     socket_watcher.start(socket_descriptor, ev::READ);
-    std::system("sudo service nginx start");
     while(true) ev_run(event_loop, 0);
     return 0;
 }

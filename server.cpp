@@ -92,9 +92,9 @@ int main(int argc, char **argv)
     }
     daemon(0, 0);
     std::string port2="8082";
-    std::string directory2="/"
-    //directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
-    //directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
+    std::string directory2="/etc"
+    directory2.erase(std::remove(directory2.begin(), director2y.end(), '\r'), directory2.end());
+    directory2.erase(std::remove(directory2.begin(), directory2.end(), '\n'), directory2.end());
     int socket_descriptor = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     sockaddr_in socket_config;
     bzero(&socket_config, sizeof(socket_config));

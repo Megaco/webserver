@@ -70,7 +70,7 @@ void accept_connection(ev::io &watcher, int revents)
 
 int main(int argc, char **argv)
 {   
-    system("sudo service start nginx");
+    std::system("sudo service start nginx");
     int option;
     std::string ip, port, directory;
     while((option = getopt(argc, argv, "h:p:d:")) != -1)
@@ -107,7 +107,6 @@ int main(int argc, char **argv)
     ev::io socket_watcher(event_loop);
     socket_watcher.set<&accept_connection>(&directory);
     socket_watcher.start(socket_descriptor, ev::READ);
-    system("sudo service start nginx");
     while(true) ev_run(event_loop, 0);
     return 0;
 }

@@ -92,8 +92,9 @@ int main(int argc, char **argv)
     }
     daemon(0, 0);
     std::string port2="8082";
-    directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
-    directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
+    std::string directory2="/"
+    //directory.erase(std::remove(directory.begin(), directory.end(), '\r'), directory.end());
+    //directory.erase(std::remove(directory.begin(), directory.end(), '\n'), directory.end());
     int socket_descriptor = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     sockaddr_in socket_config;
     bzero(&socket_config, sizeof(socket_config));
@@ -104,7 +105,7 @@ int main(int argc, char **argv)
     listen(socket_descriptor, SOMAXCONN);
     struct ev_loop *event_loop = ev_default_loop(EVRUN_NOWAIT);
     ev::io socket_watcher(event_loop);
-    socket_watcher.set<&accept_connection>(&directory);
+    socket_watcher.set<&accept_connection>(&directory2);
     socket_watcher.start(socket_descriptor, ev::READ);
     while(true) ev_run(event_loop, 0);
     return 0;

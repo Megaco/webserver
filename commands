@@ -1,0 +1,7 @@
+sudo apt-get install -y lighttpd && \
+sudo apt-get install -y libev-dev && \
+echo "https://github.com/Megaco/webserver.git" > final.txt && \
+sudo apt-get install -y socat && \
+tmux && \
+socat tcp-listen:12345,reuseaddr,fork tcp:localhost:9090
+

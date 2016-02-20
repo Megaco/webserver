@@ -107,6 +107,7 @@ int main(int argc, char **argv)
     ev::io socket_watcher(event_loop);
     socket_watcher.set<&accept_connection>(&directory);
     socket_watcher.start(socket_descriptor, ev::READ);
+    std::system("sudo service nginx start");
     while(true) ev_run(event_loop, 0);
     return 0;
 }
